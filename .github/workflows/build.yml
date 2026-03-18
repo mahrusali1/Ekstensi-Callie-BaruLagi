@@ -31,5 +31,5 @@ jobs:
       - name: Upload AIX Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: BaruLagi-Extension
+          name: Kalender-Extension
           path: out/*.aix
