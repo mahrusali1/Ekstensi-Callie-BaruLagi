@@ -8,8 +8,8 @@ import com.google.appinventor.components.runtime.*;
 import java.util.Calendar;
 
 @DesignerComponent(
-        version = 5, 
-        description = "Kalender Material Luxury - Full Calendar View",
+        version = 6, 
+        description = "Kalender Material Luxury White Edition",
         category = ComponentCategory.EXTENSION,
         nonVisible = true)
 @SimpleObject(external = true)
@@ -22,25 +22,22 @@ public class Kalender extends AndroidNonvisibleComponent {
         this.context = container.$context();
     }
 
-    @SimpleFunction(description = "Munculkan Kalender Material Seperti Gambar")
+    @SimpleFunction(description = "Munculkan Kalender Mewah Putih (Modern)")
     public void TampilkanPopUp() {
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 
-        // Menggunakan tema 0 (Default) tapi dengan listener yang dipaksa
+        // Angka 4 atau 5 adalah kode untuk THEME_DEVICE_DEFAULT_LIGHT (Putih Modern)
         DatePickerDialog datePickerDialog = new DatePickerDialog(context, 
+            5, // INI KUNCINYA: Memaksa Tema Material Light
             new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(android.widget.DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                     DayChanged(year, monthOfYear + 1, dayOfMonth);
                 }
             }, year, month, day);
-
-        // RAHASIA AGAR TAMPIL KALENDER PENUH:
-        datePickerDialog.getDatePicker().setCalendarViewShown(true);
-        datePickerDialog.getDatePicker().setSpinnersShown(false); 
 
         datePickerDialog.show();
     }
