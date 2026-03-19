@@ -1,7 +1,6 @@
 package com.betaproduct.Kalender;
 
 import android.app.DatePickerDialog;
-import android.app.AlertDialog; // Tambahan untuk tema
 import android.content.Context;
 import com.google.appinventor.components.annotations.*;
 import com.google.appinventor.components.common.ComponentCategory;
@@ -9,8 +8,8 @@ import com.google.appinventor.components.runtime.*;
 import java.util.Calendar;
 
 @DesignerComponent(
-        version = 4, // Naikkan versi agar terupdate
-        description = "Kalender Pop-up Luxury - Forced Theme Edition",
+        version = 5, 
+        description = "Kalender Material Luxury - Full Calendar View",
         category = ComponentCategory.EXTENSION,
         nonVisible = true)
 @SimpleObject(external = true)
@@ -23,22 +22,25 @@ public class Kalender extends AndroidNonvisibleComponent {
         this.context = container.$context();
     }
 
-    @SimpleFunction(description = "Munculkan Kalender Melayang dengan Tema Modern")
+    @SimpleFunction(description = "Munculkan Kalender Material (Seperti Gambar)")
     public void TampilkanPopUp() {
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 
-        // Angka '5' atau '2' di bawah adalah kode rahasia untuk tema Material/Modern
+        // Menggunakan tema 0 (Default) tapi dengan listener yang dipaksa
         DatePickerDialog datePickerDialog = new DatePickerDialog(context, 
-            AlertDialog.THEME_HOLO_LIGHT, // Paksa tema cerah modern
             new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(android.widget.DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                     DayChanged(year, monthOfYear + 1, dayOfMonth);
                 }
             }, year, month, day);
+
+        // RAHASIA AGAR TAMPIL KALENDER PENUH:
+        datePickerDialog.getDatePicker().setCalendarViewShown(true);
+        datePickerDialog.getDatePicker().setSpinnersShown(false); 
 
         datePickerDialog.show();
     }
